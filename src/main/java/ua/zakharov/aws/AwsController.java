@@ -28,25 +28,13 @@ public class AwsController implements RequestHandler<APIGatewayProxyRequestEvent
     @Override
     public APIGatewayProxyResponseEvent  handleRequest(APIGatewayProxyRequestEvent requestEvent, Context context) {
         LambdaLogger logger = context.getLogger();
-        logger.log("Event's body before gson str: " + requestEvent.toString() + "\n");
-        logger.log("Event's body before gson body: " + requestEvent.getBody() + "\n");
+        logger.log("Function started working..." + "\n");
+
         MessageBody jsonEvent = gson.fromJson(requestEvent.getBody(), MessageBody.class);
-        logger.log("Event's body after gson: " + jsonEvent + "\n");
+        logger.log("Data from JSON request: " + jsonEvent + "\n");
+
         sendAmazonEmail(jsonEvent.toString(), context);
-        //String json = gson.toJson(stringStringMap);
-        //MessageBody messageBody = gson.fromJson(json, MessageBody.class);
-       // String bodyResponse = messageBody.toString();
-      //  logger.log(bodyResponse + "\n");
-//        String line = stringStringMap.keySet()
-//                .stream().map(key -> key + "=" + stringStringMap.get(key))
-//                .collect(Collectors.joining(", ", "{", "}"));
-//        logger.log("Enent Json: " + line + "\n");
-//        logger.log("Sending email..." + "\n");
-//        sendAmazonEmail(line, context);
-//        response.put("statuscode", 200);
-//        response.put("headers", "{'Content-Type': 'application/json'}");
-//        response.put("body", json);
-//        response.put("isBase64Encoded", false);
+
         return createResponse(jsonEvent.toString());
     }
 
