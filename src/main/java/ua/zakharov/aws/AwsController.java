@@ -7,22 +7,18 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEvent;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 import com.amazonaws.services.simpleemail.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ua.zakharov.aws.model.MessageBody;
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 
 public class AwsController implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+    private final static String SENDER = "feedback@csiworks.net";
+    private final static String RECIPIENT = "andreyb@csiworks.net";
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
@@ -56,11 +52,9 @@ public class AwsController implements RequestHandler<APIGatewayProxyRequestEvent
                     AmazonSimpleEmailServiceClientBuilder.standard().withRegion(regions).build();
 
             SendEmailRequest sendEmailRequest = new SendEmailRequest();
-            sendEmailRequest.setSource("fencingmylove@gmail.com");
+            sendEmailRequest.setSource(SENDER);
 
-            Destination destination = new Destination(List.of(
-                    "vadimgudym@gmail.com",
-                    "andreyb@csiworks.net"));
+            Destination destination = new Destination(List.of(RECIPIENT));
             sendEmailRequest.setDestination(destination);
 
             Content subject = new Content("The letter from Amazon SES");
