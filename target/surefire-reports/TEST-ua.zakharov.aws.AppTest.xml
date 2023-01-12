@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="ua.zakharov.aws.AppTest" time="0.01" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="ua.zakharov.aws.AppTest" time="0.005" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2022.2.2"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -62,5 +62,5 @@
     <property name="sun.stdout.encoding" value="UTF-8"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="ua.zakharov.aws.AppTest" name="testApp" time="0.01"/>
+  <testcase classname="ua.zakharov.aws.AppTest" name="testApp" time="0.005"/>
 </testsuite>

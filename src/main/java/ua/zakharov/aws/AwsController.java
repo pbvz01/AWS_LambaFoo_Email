@@ -17,8 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AwsController implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+    private final static String EMAIL_TITLE = "The letter from Amazon SES";
     private final static String SENDER = "feedback@csiworks.net";
-    private final static String RECIPIENT = "andreyb@csiworks.net";
+    private final static String RECIPIENT = "steves@csiworks.net";
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
@@ -57,7 +58,7 @@ public class AwsController implements RequestHandler<APIGatewayProxyRequestEvent
             Destination destination = new Destination(List.of(RECIPIENT));
             sendEmailRequest.setDestination(destination);
 
-            Content subject = new Content("The letter from Amazon SES");
+            Content subject = new Content(EMAIL_TITLE);
             Content text = new Content(content);
 
             Body body = new Body(text);
